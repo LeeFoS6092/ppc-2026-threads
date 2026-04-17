@@ -47,4 +47,4 @@ INSTANTIATE_TEST_SUITE_P(HoarSortPerf, LifanovKRunPerfTestSEQ, kGtestValues,
                          kPerfTestName);
 
 } // namespace
-} // namespace lifanov_k_simple_hoar_seq
+} // namespace lifanov_k_simple_hoar_seq 

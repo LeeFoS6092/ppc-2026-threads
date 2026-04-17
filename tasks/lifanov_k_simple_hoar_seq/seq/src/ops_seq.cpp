@@ -11,9 +11,7 @@ LifanovKSimpleHoarSEQ::LifanovKSimpleHoarSEQ(const InType &in) {
   GetOutput() = {};
 }
 
-bool LifanovKSimpleHoarSEQ::ValidationImpl() {
-  return !GetInput().empty();
-}
+bool LifanovKSimpleHoarSEQ::ValidationImpl() { return !GetInput().empty(); }
 
 bool LifanovKSimpleHoarSEQ::PreProcessingImpl() {
   data_ = GetInput();
@@ -31,12 +29,14 @@ int LifanovKSimpleHoarSEQ::Partition(std::vector<int> &arr, int low, int high) {
     do {
       j--;
     } while (arr[j] > pivot);
-    if (i >= j) return j;
+    if (i >= j)
+      return j;
     std::swap(arr[i], arr[j]);
   }
 }
 
-void LifanovKSimpleHoarSEQ::QuickSortHoare(std::vector<int> &arr, int low, int high) {
+void LifanovKSimpleHoarSEQ::QuickSortHoare(std::vector<int> &arr, int low,
+                                           int high) {
   if (low < high) {
     int p = Partition(arr, low, high);
     QuickSortHoare(arr, low, p);
@@ -44,7 +44,8 @@ void LifanovKSimpleHoarSEQ::QuickSortHoare(std::vector<int> &arr, int low, int h
   }
 }
 
-std::vector<int> LifanovKSimpleHoarSEQ::Merge(const std::vector<int> &left, const std::vector<int> &right) {
+std::vector<int> LifanovKSimpleHoarSEQ::Merge(const std::vector<int> &left,
+                                              const std::vector<int> &right) {
   std::vector<int> res;
   res.reserve(left.size() + right.size());
   size_t i = 0, j = 0;
@@ -55,13 +56,16 @@ std::vector<int> LifanovKSimpleHoarSEQ::Merge(const std::vector<int> &left, cons
       res.push_back(right[j++]);
     }
   }
-  while (i < left.size()) res.push_back(left[i++]);
-  while (j < right.size()) res.push_back(right[j++]);
+  while (i < left.size())
+    res.push_back(left[i++]);
+  while (j < right.size())
+    res.push_back(right[j++]);
   return res;
 }
 
 bool LifanovKSimpleHoarSEQ::RunImpl() {
-  if (data_.size() <= 1) return true;
+  if (data_.size() <= 1)
+    return true;
 
   size_t mid = data_.size() / 2;
   std::vector<int> left_part(data_.begin(), data_.begin() + mid);
@@ -71,7 +75,7 @@ bool LifanovKSimpleHoarSEQ::RunImpl() {
   QuickSortHoare(right_part, 0, static_cast<int>(right_part.size() - 1));
 
   data_ = Merge(left_part, right_part);
-  
+
   return true;
 }
 
@@ -80,4 +84,4 @@ bool LifanovKSimpleHoarSEQ::PostProcessingImpl() {
   return std::is_sorted(GetOutput().begin(), GetOutput().end());
 }
 
-}  // namespace lifanov_k_simple_hoar_seq
+} // namespace lifanov_k_simple_hoar_seq

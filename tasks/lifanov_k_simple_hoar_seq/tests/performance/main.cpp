@@ -3,8 +3,10 @@
 #include <random>
 #include <vector>
 
+#include "lifanov_k_simple_hoar_seq/common/include/common.hpp"
 #include "lifanov_k_simple_hoar_seq/seq/include/ops_seq.hpp"
 #include "util/include/perf_test_util.hpp"
+
 
 namespace lifanov_k_simple_hoar_seq {
 

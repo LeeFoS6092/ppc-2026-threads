@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <vector>
 
+#include "lifanov_k_simple_hoar_seq/common/include/common.hpp"
+
 namespace lifanov_k_simple_hoar_seq {
 
 LifanovKSimpleHoarSEQ::LifanovKSimpleHoarSEQ(const InType &in) {

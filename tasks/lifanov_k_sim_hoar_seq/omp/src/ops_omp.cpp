@@ -1,16 +1,15 @@
 #include "lifanov_k_sim_hoar_seq/omp/include/ops_omp.hpp"
 
 #include <omp.h>
-#include <algorithm>
-#include <vector>
 
 #include "lifanov_k_sim_hoar_seq/common/include/common.hpp"
 #include "util/include/util.hpp"
 
 namespace lifanov_k_sim_hoar_seq {
 
-LifanovKSimpleHoarOMP::LifanovKSimpleHoarOMP(const InType &in) : input_(in) {
+LifanovKSimpleHoarOMP::LifanovKSimpleHoarOMP(const InType &in) {
   SetTypeOfTask(GetStaticTypeOfTask());
+  GetInput() = in;
 }
 
 bool LifanovKSimpleHoarOMP::ValidationImpl() {

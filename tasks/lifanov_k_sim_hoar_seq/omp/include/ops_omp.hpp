@@ -19,8 +19,8 @@ class LifanovKSimpleHoarOMP : public BaseTask {
   bool RunImpl() override;
   bool PostProcessingImpl() override;
 
-  static void ParallelQuicksort(int* data, int left, int right);
-  
+  static void ParallelQuicksort(int *data, int left, int right);
+
   InType input_;
   OutType output_;
 };

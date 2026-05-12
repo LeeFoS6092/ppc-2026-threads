@@ -1,6 +1,7 @@
 #include "lifanov_k_sim_hoar_seq/omp/include/ops_omp.hpp"
 
 #include <omp.h>
+
 #include <algorithm>
 #include <vector>
 
@@ -24,13 +25,15 @@ bool LifanovKSimpleHoarOMP::PreProcessingImpl() {
 }
 
 bool LifanovKSimpleHoarOMP::RunImpl() {
-  if (output_.empty()) return true;
+  if (output_.empty()) {
+    return true;
+  }
 
   int num_threads = ppc::util::GetNumThreads();
 
-  #pragma omp parallel num_threads(num_threads)
+#pragma omp parallel num_threads(num_threads)
   {
-    #pragma omp single nowait
+#pragma omp single nowait
     {
       ParallelQuicksort(output_.data(), 0, static_cast<int>(output_.size()) - 1);
     }
@@ -44,15 +47,21 @@ bool LifanovKSimpleHoarOMP::PostProcessingImpl() {
   return true;
 }
 
-void LifanovKSimpleHoarOMP::ParallelQuicksort(int* data, int left, int right) {
-  if (left >= right) return;
+void LifanovKSimpleHoarOMP::ParallelQuicksort(int *data, int left, int right) {
+  if (left >= right) {
+    return;
+  }
 
   int i = left, j = right;
   int pivot = data[left + (right - left) / 2];
 
   while (i <= j) {
-    while (data[i] < pivot) i++;
-    while (data[j] > pivot) j--;
+    while (data[i] < pivot) {
+      i++;
+    }
+    while (data[j] > pivot) {
+      j--;
+    }
     if (i <= j) {
       std::swap(data[i], data[j]);
       i++;
@@ -61,16 +70,20 @@ void LifanovKSimpleHoarOMP::ParallelQuicksort(int* data, int left, int right) {
   }
 
   if (right - left > 4096) {
-    #pragma omp task shared(data)
+#pragma omp task shared(data)
     ParallelQuicksort(data, left, j);
 
-    #pragma omp task shared(data)
+#pragma omp task shared(data)
     ParallelQuicksort(data, i, right);
-    
-    #pragma omp taskwait
+
+#pragma omp taskwait
   } else {
-    if (left < j) ParallelQuicksort(data, left, j);
-    if (i < right) ParallelQuicksort(data, i, right);
+    if (left < j) {
+      ParallelQuicksort(data, left, j);
+    }
+    if (i < right) {
+      ParallelQuicksort(data, i, right);
+    }
   }
 }
 

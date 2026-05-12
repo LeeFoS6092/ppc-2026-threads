@@ -9,7 +9,7 @@
 #include <vector>
 
 #include "lifanov_k_sim_hoar_seq/common/include/common.hpp"
-#include "lifanov_k_sim_hoar_seq/seq/include/ops_seq.hpp"
+#include "lifanov_k_sim_hoar_seq/omp/include/ops_omp.hpp"
 #include "util/include/func_test_util.hpp"
 #include "util/include/util.hpp"
 

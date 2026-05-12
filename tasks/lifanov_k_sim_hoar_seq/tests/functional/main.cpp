@@ -73,7 +73,7 @@ const std::array<TestType, 3> kTestParam = {std::make_tuple(kV1, GetSortedVector
                                             std::make_tuple(kV3, GetSortedVector(kV3), "reverse_5")};
 
 const auto kTestTasksList =
-    ppc::util::AddFuncTask<LifanovKSimpleHoarSEQ, InType>(kTestParam, PPC_SETTINGS_lifanov_k_sim_hoar_seq);
+    ppc::util::AddFuncTask<LifanovKSimpleHoarOMP, InType>(kTestParam, PPC_SETTINGS_lifanov_k_sim_hoar_seq);
 
 const auto kGtestValues = ppc::util::ExpandToValues(kTestTasksList);
 
